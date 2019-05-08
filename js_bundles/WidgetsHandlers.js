@@ -6520,7 +6520,8 @@ function tryUpdateWidgets() {
                 
                 drawStatusS01(arrayClientraw[49], arrayClientraw[32], arrayClientraw[74]); //Status widget must always be updated
                 
-                if (arrayClientraw.equals(arrayClientrawOld) === false) {
+    //    MMH        if (arrayClientraw.equals(arrayClientrawOld) === false) {
+		        if (arrayClientraw.equals(arrayClientrawOld) == false) {
                     arrayClientrawOld = arrayClientraw;
                     window.dispatchEvent(loadEvents.clientRaw);
                 }
@@ -6584,19 +6585,21 @@ function updateClientraw() {
     xhttpCR = loadArray(baseURL + clientRawName);
     
     xhttpCR.onreadystatechange = function () {
-        if (xhttpCR.readyState === 4) {
-            if (xhttpCR.status === 200) {
+     // MMH  if (xhttpCR.readyState === 4) {
+          if (xhttpCR.readyState == 4) {
+     // MMH      if (xhttpCR.status === 200) {
+	      if (xhttpCR.status == 200) {
                 dataCollectErrorCR = false;
                 arrayClientraw = xhttpCR.responseText.toString().split(" ");
                 doneCR = true;
             } else {
+
                 dataCollectErrorCR = true;
             }
             tryUpdateWidgets();
-        }
+	}
     };
     attemptedCR = true;
-
 }
 
 function updateClientrawExtra() {
@@ -6606,8 +6609,8 @@ function updateClientrawExtra() {
 	xhttpCRE = loadArray(baseURL + clientRawExtraName);
 	
     xhttpCRE.onreadystatechange = function () {
-        if (xhttpCRE.readyState === 4) {
-            if (xhttpCRE.status === 200) {
+        if (xhttpCRE.readyState == 4) {
+            if (xhttpCRE.status == 200) {
                 dataCollectErrorCRE = false;
                 arrayClientrawExtra = xhttpCRE.responseText.toString().split(" ");
                 doneCRE = true;
@@ -6627,8 +6630,8 @@ function updateClientrawHour() {
 	xhttpCRH = loadArray(baseURL + clientRawHourName);
     
     xhttpCRH.onreadystatechange = function () {
-        if (xhttpCRH.readyState === 4) {
-            if (xhttpCRH.status === 200) {
+        if (xhttpCRH.readyState == 4) {
+            if (xhttpCRH.status == 200) {
                 dataCollectErrorCRH = false;
                 arrayClientrawHour = xhttpCRH.responseText.toString().split(" ");
                 doneCRH = true;
@@ -6648,8 +6651,8 @@ function updateClientrawDaily() {
 	xhttpCRD = loadArray(baseURL + clientRawDailyName);
     
     xhttpCRD.onreadystatechange = function () {
-        if (xhttpCRD.readyState === 4) {
-            if (xhttpCRD.status === 200) {
+        if (xhttpCRD.readyState == 4) {
+            if (xhttpCRD.status == 200) {
                 dataCollectErrorCRD = false;
                 arrayClientrawDaily = xhttpCRD.responseText.toString().split(" ");
                 doneCRD = true;
