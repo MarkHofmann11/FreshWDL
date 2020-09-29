@@ -563,7 +563,7 @@ function setUpTemp01() {
     //Set up fill circle
     tempBar01.roundBotFill = new createjs.Shape();
 	tempBar01.roundBotFill.snapToPixel = true;
-	tempBar01.roundBotFill.graphics.beginFill("rgb(255, 221, 37)");
+	tempBar01.roundBotFill.graphics.beginFill("rgb(255, 37, 37)");
     tempBar01.roundBotFill.graphics.setStrokeStyle(0);
 	tempBar01.circFillCommand = tempBar01.roundBotFill.graphics.drawCircle(0, 0, 0).command;
 	tempBar01.stage.addChild(tempBar01.roundBotFill);
@@ -571,7 +571,7 @@ function setUpTemp01() {
     //Set up fill rectange
     tempBar01.roundRectFillTop = new createjs.Shape();
 	tempBar01.roundRectFillTop.snapToPixel = true;
-	tempBar01.roundRectFillTop.graphics.beginFill("rgb(255, 221, 37)");
+	tempBar01.roundRectFillTop.graphics.beginFill("rgb(255, 37, 37)");
     tempBar01.roundRectFillTop.graphics.setStrokeStyle(0);
 	tempBar01.rectFillCommand = tempBar01.roundRectFillTop.graphics.drawRoundRect(0, 0, 0, 0, 0).command;
 	tempBar01.stage.addChild(tempBar01.roundRectFillTop);
@@ -2211,7 +2211,7 @@ function setUpWC01() {
     //Set up fill circle
     windchill01.roundBotFill = new createjs.Shape();
 	windchill01.roundBotFill.snapToPixel = true;
-	windchill01.roundBotFill.graphics.beginFill("rgb(255, 221, 37)");
+	windchill01.roundBotFill.graphics.beginFill("rgb(255, 37, 37)");
     windchill01.roundBotFill.graphics.setStrokeStyle(0);
 	windchill01.circFillCommand = windchill01.roundBotFill.graphics.drawCircle(0, 0, 0).command;
 	windchill01.stage.addChild(windchill01.roundBotFill);
@@ -2219,7 +2219,7 @@ function setUpWC01() {
     //Set up fill rectange
     windchill01.roundRectFillTop = new createjs.Shape();
 	windchill01.roundRectFillTop.snapToPixel = true;
-	windchill01.roundRectFillTop.graphics.beginFill("rgb(255, 221, 37)");
+	windchill01.roundRectFillTop.graphics.beginFill("rgb(255, 37, 37)");
     windchill01.roundRectFillTop.graphics.setStrokeStyle(0);
 	windchill01.rectFillCommand = windchill01.roundRectFillTop.graphics.drawRoundRect(0, 0, 0, 0, 0).command;
 	windchill01.stage.addChild(windchill01.roundRectFillTop);
@@ -5872,7 +5872,7 @@ function updateTweensWS01() {
     var beaufortSpeed = calculateBeaufort(windSpeed.values.speedOrigional);
     windSpeed.textDisplayBeaufort.text = useDict("beaufortScaleTitle") + ": " + beaufortSpeed.toString();
     
-    var colour = makeColorGradient(.42,.42,.42,0,2,4,10 + beaufortSpeed);
+    var colour = makeColorGradient(.42,.42,.42,1,0,4,10 + beaufortSpeed);
     windSpeed.textDisplayBeaufort.color = "rgb(" + colour[0] + "," + colour[1] + "," + colour[2] + ")";
     
 }
@@ -6520,7 +6520,8 @@ function tryUpdateWidgets() {
                 
                 drawStatusS01(arrayClientraw[49], arrayClientraw[32], arrayClientraw[74]); //Status widget must always be updated
                 
-                if (arrayClientraw.equals(arrayClientrawOld) === false) {
+    //    MMH        if (arrayClientraw.equals(arrayClientrawOld) === false) {
+		        if (arrayClientraw.equals(arrayClientrawOld) == false) {
                     arrayClientrawOld = arrayClientraw;
                     window.dispatchEvent(loadEvents.clientRaw);
                 }
@@ -6584,19 +6585,21 @@ function updateClientraw() {
     xhttpCR = loadArray(baseURL + clientRawName);
     
     xhttpCR.onreadystatechange = function () {
-        if (xhttpCR.readyState === 4) {
-            if (xhttpCR.status === 200) {
+     // MMH  if (xhttpCR.readyState === 4) {
+          if (xhttpCR.readyState == 4) {
+     // MMH      if (xhttpCR.status === 200) {
+	      if (xhttpCR.status == 200) {
                 dataCollectErrorCR = false;
                 arrayClientraw = xhttpCR.responseText.toString().split(" ");
                 doneCR = true;
             } else {
+
                 dataCollectErrorCR = true;
             }
             tryUpdateWidgets();
-        }
+	}
     };
     attemptedCR = true;
-
 }
 
 function updateClientrawExtra() {
@@ -6606,8 +6609,8 @@ function updateClientrawExtra() {
 	xhttpCRE = loadArray(baseURL + clientRawExtraName);
 	
     xhttpCRE.onreadystatechange = function () {
-        if (xhttpCRE.readyState === 4) {
-            if (xhttpCRE.status === 200) {
+        if (xhttpCRE.readyState == 4) {
+            if (xhttpCRE.status == 200) {
                 dataCollectErrorCRE = false;
                 arrayClientrawExtra = xhttpCRE.responseText.toString().split(" ");
                 doneCRE = true;
@@ -6627,8 +6630,8 @@ function updateClientrawHour() {
 	xhttpCRH = loadArray(baseURL + clientRawHourName);
     
     xhttpCRH.onreadystatechange = function () {
-        if (xhttpCRH.readyState === 4) {
-            if (xhttpCRH.status === 200) {
+        if (xhttpCRH.readyState == 4) {
+            if (xhttpCRH.status == 200) {
                 dataCollectErrorCRH = false;
                 arrayClientrawHour = xhttpCRH.responseText.toString().split(" ");
                 doneCRH = true;
@@ -6648,8 +6651,8 @@ function updateClientrawDaily() {
 	xhttpCRD = loadArray(baseURL + clientRawDailyName);
     
     xhttpCRD.onreadystatechange = function () {
-        if (xhttpCRD.readyState === 4) {
-            if (xhttpCRD.status === 200) {
+        if (xhttpCRD.readyState == 4) {
+            if (xhttpCRD.status == 200) {
                 dataCollectErrorCRD = false;
                 arrayClientrawDaily = xhttpCRD.responseText.toString().split(" ");
                 doneCRD = true;
@@ -6753,7 +6756,7 @@ function resizeDivFor01() {
     
     width = width.toString() + "px";
     height = height.toString() + "px";
-    stlyeString = "width:" + width.toString() + ";height:" + height.toString();
+    stlyeString = "background: #F6F6F6;text-align: center;width:" + width.toString() + ";height:" + height.toString();
     
     forecast.displayDiv.setAttribute("style", stlyeString.toString());
     //For browser compadibility
